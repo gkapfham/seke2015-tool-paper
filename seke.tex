@@ -1,0 +1,117 @@
+%!TEX root=seke.tex
+% mainfile: seke.tex
+
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{latex8}
+\usepackage{times}
+\usepackage{inconsolata}
+\usepackage{pifont}
+
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,shadows}
+\usepackage{amsmath,bm,times}
+\usepackage{verbatim}
+
+\usepackage{subcaption}
+\usepackage{bibspacing}
+
+\usepackage[small,compact]{titlesec}
+% \usepackage{titlesec}
+
+\newcommand{\goallegheny}{$^{\mbox{\footnotesize \ding{72}}}$}
+\newcommand{\gosheffield}{$^{\mbox{\footnotesize \ding{73}}}$}
+\newcommand{\gospace}{$\;$}
+
+% \makeatletter
+% \renewenvironment{thebibliography}[1]{%
+%   \vspace*{-.1in}
+%   \@xp\section\@xp*\@xp{\refname}%
+%   % \normalfont\footnotesize\labelsep .5em\relax
+%   \renewcommand\theenumiv{\arabic{enumiv}}\let\p@enumiv\@empty
+%   \vspace*{-.1in}% NEW
+%   \list{\@biblabel{\theenumiv}}{\settowidth\labelwidth{\@biblabel{#1}}%
+%     \leftmargin\labelwidth \advance\leftmargin\labelsep
+%     \usecounter{enumiv}}%
+%   % \sloppy \clubpenalty\@M \widowpenalty\clubpenalty
+%   % \sfcode`\.=\@m
+% }{%
+%   \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+%   \endlist
+% }
+% \makeatother
+
+\begin{document}
+
+% \title{Empirically Evaluating the Efficiency of Search-based \\ Test Data
+% Generation for Relational Database Schemas\vspace*{-.1in}}
+
+\title{\vspace*{-.6in}Automatically Evaluating the Efficiency of \\ Search-Based Test Data
+Generation for Relational Database Schemas\vspace*{-.1in}}
+
+\author{Cody Kinneer \goallegheny                \and
+        Gregory M.\ Kapfhammer \goallegheny      \and
+        Chris Wright \gosheffield                \and
+        Phil McMinn \gosheffield \vspace*{-.1in}
+      }
+
+\affiliation{
+      \goallegheny \gospace Allegheny College       \and
+      \gosheffield \gospace University of Sheffield
+}
+
+\maketitle
+
+\begin{abstract}
+
+% When evaluating an algorithm, it is often useful to speak of it's efficiency in terms of it's worst-case complexity.
+% This is the case for search-based test data generation tools.
+% on the search-based data generation tool \textit{SchemaAnalyst}.
+
+% This paper introduces a framework for conducting automated empirical studies of algorithms by doubling
+% the size of the input and observing the change in runtime.
+
+% After describing a way to systematically doubling the size of structured data, we report on a study demonstrating the
+% presented method's effectiveness.
+
+The characterization of an algorithm's worst-case time complexity is useful because it succinctly captures how its
+runtime will grow as the input size becomes arbitrarily large.  However, for certain algorithms---such as those
+performing search-based test data generation---a theoretical analysis to determine worst-case complexity is difficult to
+generalize and thus not often reported in the literature.  This paper introduces a framework that empirically determines
+an algorithm's worst-case time complexity by doubling the size of the input and observing the change in runtime.  Since
+the relational database is a centerpiece of modern software and the database's schema is frequently untested, we apply
+the doubling technique to the domain of data generation for relational database schemas, a field where worst-case time
+complexities are unknown.  In addition to demonstrating the feasibility of suggesting the worst-case runtimes of the
+chosen algorithms and configurations, the results of our study reveal performance trade-offs in schema testing
+strategies.
+
+\end{abstract}
+
+\input{writing/intro}
+\input{writing/background}
+\input{writing/technique}
+% begin experiment section
+\input{writing/experimentdesign}
+\input{writing/results_bigOh}
+\input{writing/results_trees}
+\input{writing/results_bwplots}
+\input{writing/results_tables}
+\input{writing/threats}
+\input{writing/conclusion}
+
+% GMK NOTE: I removed this and moved it into the background section
+% \input{writing/relatedworks}
+
+% \titleformat{\chapter}{\huge\bf}{}{10pt}{\arabic{chapter} \ }[\titlerule]
+\setlength{\bibitemsep}{.075in}
+{\footnotesize
+  \bibliographystyle{IEEEtran}
+% \vspace*{-.05in}
+\bibliography{bibtex/seke}}
+
+\end{document}
