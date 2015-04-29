@@ -69,16 +69,6 @@ Generation for Relational Database Schemas\vspace*{-.1in}}
 
 \begin{abstract}
 
-% When evaluating an algorithm, it is often useful to speak of it's efficiency in terms of it's worst-case complexity.
-% This is the case for search-based test data generation tools.
-% on the search-based data generation tool \textit{SchemaAnalyst}.
-
-% This paper introduces a framework for conducting automated empirical studies of algorithms by doubling
-% the size of the input and observing the change in runtime.
-
-% After describing a way to systematically doubling the size of structured data, we report on a study demonstrating the
-% presented method's effectiveness.
-
 The characterization of an algorithm's worst-case time complexity is useful because it succinctly captures how its
 runtime will grow as the input size becomes arbitrarily large.  However, for certain algorithms---such as those
 performing search-based test data generation---a theoretical analysis to determine worst-case complexity is difficult to
@@ -89,23 +79,7 @@ the doubling technique to the domain of data generation for relational database 
 complexities are unknown.  In addition to demonstrating the feasibility of suggesting the worst-case runtimes of the
 chosen algorithms and configurations, the results of our study reveal performance trade-offs in schema testing
 strategies.
-
 \end{abstract}
-
-\input{writing/intro}
-\input{writing/background}
-\input{writing/technique}
-% begin experiment section
-\input{writing/experimentdesign}
-\input{writing/results_bigOh}
-\input{writing/results_trees}
-\input{writing/results_bwplots}
-\input{writing/results_tables}
-\input{writing/threats}
-\input{writing/conclusion}
-
-% GMK NOTE: I removed this and moved it into the background section
-% \input{writing/relatedworks}
 
 % \titleformat{\chapter}{\huge\bf}{}{10pt}{\arabic{chapter} \ }[\titlerule]
 \setlength{\bibitemsep}{.075in}
