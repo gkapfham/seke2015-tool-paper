@@ -195,20 +195,20 @@ corresponding ratios.
 \begin{verbatim}
  Usage: <java SchemaExperiment> [options]
 Options:  
- -schema, -s        Select which schema to use (default: iTrustBioSQLMerged)
- -criterion         Select which criterion to use (default: AICC)
- -datagenerator     Select which data generator to use (default: directedRandom)
- -doubler           Select which schemaDoubler to use (default: DoubleAll)
- -convergence       Experiment convergent if differance < tolerance (default: 0.4)
- -lookBack          Number of ratios to compair for convergence (default: 4)
- -tuningTries       Minimum number of times to double n to try to break out of O(1) (default: 20)
- -minDoubles        Minimum number of doubles to try (default: 5)
- -noTune            Disable trying to break out of O(1) (default: false)
- -giveUp, -maxTime  Max time for a single trial in hours (default: 8)
- -help, -usage      Display command line options (default: true)
- -o, -out, -csv     Name of the csv file to save data to (default: data/LastExperiment.csv)
- -overwrite         Overwrite existing CSV rather than append (default: false)
- -verbose, -debug   Display verbose output (default: false)
+ -schema, -s        Select which schema to use 
+ -criterion         Select which criterion to use 
+ -datagenerator     Select which data generator to use 
+ -doubler           Select which schemaDoubler to use 
+ -convergence       Experiment convergent if differance < tolerance 
+ -lookBack          Number of ratios to compair for convergence 
+ -tuningTries       Minimum number of times to doubles before O(1)  
+ -minDoubles        Minimum number of doubles to try 
+ -noTune            Disable trying to break out of O(1) 
+ -giveUp, -maxTime  Max time for a single trial in hours 
+ -help, -usage      Display command line options 
+ -o, -out, -csv     Name of the csv file to save data to 
+ -overwrite         Overwrite existing CSV rather than append 
+ -verbose, -debug   Display verbose output 
 \end{verbatim}
 }
 
