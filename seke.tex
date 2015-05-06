@@ -20,6 +20,7 @@
 
 \usepackage{subcaption}
 \usepackage{bibspacing}
+\usepackage{listings}
 
 \usepackage[small,compact]{titlesec}
 % \usepackage{titlesec}
@@ -28,31 +29,13 @@
 \newcommand{\gosheffield}{$^{\mbox{\footnotesize \ding{73}}}$}
 \newcommand{\gospace}{$\;$}
 
-% \makeatletter
-% \renewenvironment{thebibliography}[1]{%
-%   \vspace*{-.1in}
-%   \@xp\section\@xp*\@xp{\refname}%
-%   % \normalfont\footnotesize\labelsep .5em\relax
-%   \renewcommand\theenumiv{\arabic{enumiv}}\let\p@enumiv\@empty
-%   \vspace*{-.1in}% NEW
-%   \list{\@biblabel{\theenumiv}}{\settowidth\labelwidth{\@biblabel{#1}}%
-%     \leftmargin\labelwidth \advance\leftmargin\labelsep
-%     \usecounter{enumiv}}%
-%   % \sloppy \clubpenalty\@M \widowpenalty\clubpenalty
-%   % \sfcode`\.=\@m
-% }{%
-%   \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
-%   \endlist
-% }
-% \makeatother
+
 
 \begin{document}
+\lstset{language=Java}
 
-% \title{Empirically Evaluating the Efficiency of Search-based \\ Test Data
-% Generation for Relational Database Schemas\vspace*{-.1in}}
-
-\title{\vspace*{-.6in}Automatically Evaluating the Efficiency of \\ Search-Based Test Data
-Generation for Relational Database Schemas\vspace*{-.1in}}
+\title{\vspace*{-.6in}AERATE - A tool for Automated EmpRical
+AsymTotic Evalution\vspace*{-.1in}}
 
 \author{Cody Kinneer \goallegheny                \and
         Gregory M.\ Kapfhammer \goallegheny      \and
@@ -68,18 +51,199 @@ Generation for Relational Database Schemas\vspace*{-.1in}}
 \maketitle
 
 \begin{abstract}
-
-The characterization of an algorithm's worst-case time complexity is useful because it succinctly captures how its
-runtime will grow as the input size becomes arbitrarily large.  However, for certain algorithms---such as those
-performing search-based test data generation---a theoretical analysis to determine worst-case complexity is difficult to
-generalize and thus not often reported in the literature.  This paper introduces a framework that empirically determines
-an algorithm's worst-case time complexity by doubling the size of the input and observing the change in runtime.  Since
-the relational database is a centerpiece of modern software and the database's schema is frequently untested, we apply
-the doubling technique to the domain of data generation for relational database schemas, a field where worst-case time
-complexities are unknown.  In addition to demonstrating the feasibility of suggesting the worst-case runtimes of the
-chosen algorithms and configurations, the results of our study reveal performance trade-offs in schema testing
-strategies.
+% Do we even need this? I don't know
 \end{abstract}
+
+%TODO cite the main paper (somewhere)
+\section{Basic Introduction to Doubling}
+  
+  % Blatantly copied from conference paper
+
+  {\bf Worst-Case Time Complexity}. A useful understanding of an algorithm's efficiency, the worst-case time complexity
+gives an upper bound on how an increase in the size of the input, denoted $n$, increases the execution time of the
+algorithm, $f(n)$.  This relationship is often expressed in the ``big-Oh'' notation, where $f(n)$ is $O(g(n))$ means
+that the time increases by no more than on order of $g(n)$. Since the worst-case complexity of an algorithm is evident
+when $n$ is large~\cite{mcgeoch2012}, one approach for determining the big-Oh complexity of an algorithm is to conduct
+a doubling experiment with increasingly bigger input sizes. By measuring the time needed to run the algorithm on an
+input of size $n$ and the time needed to run with input of size $2n$, the algorithm's order of growth can be
+empirically determined~\cite{mcgeoch2012}.
+
+The goal of a doubling experiment is to draw a conclusion regarding the efficiency of the algorithm from the ratio
+$f(2n)/f(n)$ that represents the factor of change in runtime from input sizes $n$ to $2n$. For instance, a ratio of $2$
+would indicate that doubling the input size resulted in the runtime's doubling, thus leading to the conclusion that the
+algorithm under study is $O(n)$ or $O(n\log n)$.  Table~\ref{table:ratios} shows some common time complexities and their
+corresponding ratios.
+
+\begin{table}[h!]
+  \vspace*{-.15in}
+  \begin{center}
+    \begin{tabular}{c|l}
+      Ratio $f(2n)/f(n)$ & Worst-Case Conclusion              \\ \hline
+      1                  & constant or logarithmic \\
+      2                  & linear or linearithmic  \\
+      4                  & quadratic               \\
+      8                  & cubic                   \\
+      % x                & $O(n^{\log x})$
+    \end{tabular}
+  \end{center}
+  \vspace*{-.25in}
+
+  \caption{Conclusions for worst-case time complexity.}~\label{table:ratios}
+  \vspace*{-.35in}
+
+\end{table}
+
+\section{Description of Tool}
+    \textit{AERATE} \cite{kinneer2015,tool} is a tool for
+    determining an algorithms big-Oh order of growth by
+    conducting a doubling experiment automatically.  In order to
+    evaluate an algorithm $A$, \textit{AERATE} takes as input two
+    functions. The first is a timing function $T(n)$ that runs an
+    implementation of $A$ on the provided input $n$ and returns
+    the runtime, and the second is a doubling function $D(n)$ that
+    accepts an input for $A$ and returns an input $2n$ twice as
+    complex as the original. Once the functions have been supplied,
+    \textit{AERATE} needs an initial input $n$ for $A$, and will then 
+    output $x$ where $A \in O(x)$.
+
+    \textit{AERATE} infers the worst-case time complexity of the $A$ by
+    repeatedly doubling $n$ until $n$ is large enough that the
+    worst-case time complexity of $A$ is apparent.  \textit{AERATE}
+    determines when $n$ is large enough by monitoring the doubling
+    ratio $\frac{T(2n)}{T(n)}$ for multiple iterations of doubling.
+    Using a convergence algorithm, \textit{AERATE} stops doubling $n$
+    when the doubling ratio reaches a quiescent state.
+   
+  % Blatantly copied from conference paper
+  To test for convergence, for every time $t$, where $t$ denotes the number of times the input has been doubled, we
+  record the doubling ratio $r_t = \frac{f(2^t n)}{f(2^{t-1}n)}$. The current ratio $r_c$ is compared to a previous
+  ratio $r_p$ where $p$ is determined by a $\mathit{lookback}$ value, such that $p=c-\mathit{lookback}$.  The result of
+  the comparison is a $\mathit{difference}$ value, given by $\mathit{difference} = |r_c - r_p|$.  This is then compared
+  to a $\mathit{tolerance}$ value, and the experiment is judged to have converged when $\mathit{difference}<\mathit{tolerance}$.
+  The $\mathit{lookback}$ and $\mathit{tolerance}$ values are both configurable parameters.
+
+  % Blatantly copied from conference paper with slight changes
+  Early use of the tool revealed that this converge checking rule was
+  not enough, since a very small initial $n$ may complete nearly
+  instantaneous even for multiple rounds of doubling.  For example, the
+  time that it takes to sort a list of size $1, 2, 4, 8, \dots 128$
+  might not even be distinguishable. This would appear to converge to 1, which 
+  indicates constant time complexity. To prevent the experiment from incorrectly terminating
+  given a small starting $n$, \textit{AERATE} requires that a program under study display a ratio of 1 for a
+  $\mathit{minimum}$ number of times before judging that the ratio does in fact converge to 1.  That is, if $r_c = 1$,
+  $t > \mathit{minimum}$ must be true, in addition to the tolerance test, before the experiment is declared convergent.
+  The $\mathit{minimum}$ parameter is also a configurable parameter.  Because a doubling ratio of 1 signifies
+  constant or logarithmic time complexity, requiring these doubles does not significantly increase the experimentation
+  time needed, all the while providing further assurance that a small ratio is not due to an insufficiently small $n$.
+
+    % TODO fix informal language here
+    % the tone I would use when presenting the demo, not sure if
+    % appropriate for the tool paper
+    \subsection{Implementation}
+    \textit{AERATE} is implemented as an abstract class in the Java
+    programming language.  To use \textit{AERATE} to evaluate your own
+    algorithm $A$, you need only extend the \textit{DoublingExperiment}
+    class to provide your own $T$ and $D$ functions.  $T$ should be
+    implemented by providing a \lstinline$double timedTest()$ method, and $D$
+    should be implemented by providing a \lstinline$void doubleN()$
+    method. Note that these methods do not accept any parameters,
+    and only \lstinline$timedTest()$ returns a value. The programmer
+    must ensure that \lstinline$timedTest()$ returns the runtime for the
+    current input size, and that when \lstinline$doubleN()$ is called,
+    the input size is doubled.  Actually initializing and storing the
+    input should be handled by the specific implementation. The
+    \lstinline$runExperiment()$ method can then be called to to conduct
+    a doubling experiment, and the \lstinline$printBigOh()$ method can
+    be called to show the result. Figure~\ref{fig:qsprogram} shows an
+    implementation that conducts a doubling experiment on the QuickSort
+    algorithm.
+
+    %TODO GMK: do we need to cite the quicksort implementation anywhere?
+
+    % we can cut this, but it does show how easy the tool makes things
+    
+    \begin{figure}[h!]
+    \lstinputlisting[basicstyle=\tiny]{content/QuickSortTrimmed.java}
+    \caption{A simple Java class that performs a performance evaluation
+    on the QuickSort algorithm.}
+    \label{fig:qsprogram}
+    \end{figure}
+    \subsection{Case study: sorting algorithms}
+    \lstset{language=bash}
+    Included with the \textit{AERATE} tool is an example doubling
+    experiment called \texttt{SortingExperiment}.  This program provides a number
+    of canonical sorting algorithms with well known worst-case time
+    complexities.  Doubling experiments may be run on these algorithms
+    by running the command \texttt{java SortingExperiment algname},
+    replacing \texttt{algname} with the name of the desired sorting
+    algorithm. Running the command without providing \texttt{algname}
+    will show a list of the available options.
+
+    \subsection{Case study: \textit{SchemaAnalyst}}
+    In \cite{kinneer2015}, we use \textit{AERATE} to perform a
+    comprehensive analysis on the search-based test data generation 
+    tool \textit{SchemaAnalyst} \cite{kapfhammer2013}, that generates
+    test suites for relational database schemas. Since this tool is more
+    complicated than quicksort, performing doubling experiments on
+    \textit{SchemaAnalyst} requires more parameters.  To conduct these
+    experiments, we developed a class called \texttt{SchemaExperiment}
+    that extends \texttt{DoublingExperiment}.  We developed 
+    \texttt{SchemaExperiment} to allow for conducting doubling
+    experiments using a variety of \textit{SchemaAnalyst} configurations,
+    as well as exposing \textit{AERATE}'s parameters.
+{
+\tiny
+    \begin{verbatim}
+    Usage: <java SchemaExperiment> [options]
+  Options:  
+    -schema, -s        Select which schema to use (default: iTrustBioSQLMerged)
+    -criterion         Select which criterion to use (default: AICC)
+    -datagenerator     Select which data generator to use (default: directedRandom)
+    -doubler           Select which schemaDoubler to use (default: DoubleAll)
+    -convergence       Experiment convergent if differance < tolerance (default: 0.4)
+    -lookBack          Number of ratios to compair for convergence (default: 4)
+    -tuningTries       Minimum number of times to double n to try to break out of O(1) (default: 20)
+    -minDoubles        Minimum number of doubles to try (default: 5)
+    -noTune            Disable trying to break out of O(1) (default: false)
+    -giveUp, -maxTime  Max time for a single trial in hours (default: 8)
+    -help, -usage      Display command line options (default: true)
+    -o, -out, -csv     Name of the csv file to save data to (default: data/LastExperiment.csv)
+    -overwrite         Overwrite existing CSV rather than append (default: false)
+    -verbose, -debug   Display verbose output (default: false)
+    \end{verbatim}
+    }
+
+    A doubling experiment that evaluates \textit{SchemaAnalyst} using
+    the AICC coverage criterion, random data generator, RiskIt as the initial input
+    schema, and according to the number of \textsc{NotNull}s present in the
+    schema can be run by the following command:
+    \texttt{java SchemaExperiment -criterion AICC -datagenerator random -schema RiskIt -doubler DoubleNotNullsSemantic}
+    \subsection{Deploying on an HPC cluster}
+    % this is all Chris if we include it
+\section{Parameter Tuning}
+  While \textit{AERATE} greatly eases the process of conducting
+  doubling experiments, its accuracy and performance is
+  sensitive to the settings of the system's parameters.  In particular,
+  the $\mathit{tolerance}$ and $\mathit{lookback}$ values can result in
+  a doubling experiment terminating prematurely or continuing
+  indefinitely.
+  To complicate the issue further, the parameters must be re-tuned based
+  on hardware abilities of the machine being used and the performance
+  characteristics of the implementation being studied.
+
+  The reliability of the tool and repeatability of results would be
+  improved if \textit{AERATE} could select good settings for these
+  parameters automatically. A reasonable parameter tuning strategy could
+  be to run \textit{AERATE} on various algorithms of known worst-case
+  time complexities (such as the sorting algorithms) and lower the
+  \textit{tolerance} threshold until \textit{AERATE} is able to reliably 
+  infer the big-Oh complexity of the algorithms. 
+
+\section{Conclusion}
+  \textit{AERATE} makes empirically evaluating the worst-case time
+  complexity of algorithms much more convenient. By automating the
+  process of conducting these experiments, \textit{AERATE} enables large
+  scale empirical studies that would otherwise be infeasible.
 
 % \titleformat{\chapter}{\huge\bf}{}{10pt}{\arabic{chapter} \ }[\titlerule]
 \setlength{\bibitemsep}{.075in}
