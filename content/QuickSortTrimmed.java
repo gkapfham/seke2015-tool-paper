@@ -1,4 +1,5 @@
-public class QuickSortDoublingExperiment extends DoublingExperiment{
+public class QuickSortDoublingExperiment 
+    extends DoublingExperiment{
     private int size = 10;
     public static void main(String[] args){
         SortingExperiment exp = new SortingExperiment();

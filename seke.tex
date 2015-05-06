@@ -163,7 +163,7 @@ corresponding ratios.
     % we can cut this, but it does show how easy the tool makes things
     
     \begin{figure}[h!]
-    \lstinputlisting[basicstyle=\tiny]{content/QuickSortTrimmed.java}
+    \lstinputlisting[basicstyle=\scriptsize]{content/QuickSortTrimmed.java}
     \caption{A simple Java class that performs a performance evaluation
     on the QuickSort algorithm.}
     \label{fig:qsprogram}
@@ -191,27 +191,26 @@ corresponding ratios.
     \texttt{SchemaExperiment} to allow for conducting doubling
     experiments using a variety of \textit{SchemaAnalyst} configurations,
     as well as exposing \textit{AERATE}'s parameters.
-{
-\tiny
-    \begin{verbatim}
-    Usage: <java SchemaExperiment> [options]
-  Options:  
-    -schema, -s        Select which schema to use (default: iTrustBioSQLMerged)
-    -criterion         Select which criterion to use (default: AICC)
-    -datagenerator     Select which data generator to use (default: directedRandom)
-    -doubler           Select which schemaDoubler to use (default: DoubleAll)
-    -convergence       Experiment convergent if differance < tolerance (default: 0.4)
-    -lookBack          Number of ratios to compair for convergence (default: 4)
-    -tuningTries       Minimum number of times to double n to try to break out of O(1) (default: 20)
-    -minDoubles        Minimum number of doubles to try (default: 5)
-    -noTune            Disable trying to break out of O(1) (default: false)
-    -giveUp, -maxTime  Max time for a single trial in hours (default: 8)
-    -help, -usage      Display command line options (default: true)
-    -o, -out, -csv     Name of the csv file to save data to (default: data/LastExperiment.csv)
-    -overwrite         Overwrite existing CSV rather than append (default: false)
-    -verbose, -debug   Display verbose output (default: false)
-    \end{verbatim}
-    }
+{\scriptsize
+\begin{verbatim}
+ Usage: <java SchemaExperiment> [options]
+Options:  
+ -schema, -s        Select which schema to use (default: iTrustBioSQLMerged)
+ -criterion         Select which criterion to use (default: AICC)
+ -datagenerator     Select which data generator to use (default: directedRandom)
+ -doubler           Select which schemaDoubler to use (default: DoubleAll)
+ -convergence       Experiment convergent if differance < tolerance (default: 0.4)
+ -lookBack          Number of ratios to compair for convergence (default: 4)
+ -tuningTries       Minimum number of times to double n to try to break out of O(1) (default: 20)
+ -minDoubles        Minimum number of doubles to try (default: 5)
+ -noTune            Disable trying to break out of O(1) (default: false)
+ -giveUp, -maxTime  Max time for a single trial in hours (default: 8)
+ -help, -usage      Display command line options (default: true)
+ -o, -out, -csv     Name of the csv file to save data to (default: data/LastExperiment.csv)
+ -overwrite         Overwrite existing CSV rather than append (default: false)
+ -verbose, -debug   Display verbose output (default: false)
+\end{verbatim}
+}
 
     A doubling experiment that evaluates \textit{SchemaAnalyst} using
     the AICC coverage criterion, random data generator, RiskIt as the initial input
