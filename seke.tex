@@ -53,11 +53,9 @@ an automated empirical study \vspace*{-.1in}}
 \maketitle
 
 %TODO cite the main paper (somewhere)
-\section{Introduction to Doubling}
-  
-  % Blatantly copied from conference paper
 
-  {\bf Worst-Case Time Complexity}. A useful understanding of an algorithm's efficiency, the worst-case time complexity
+  % Blatantly copied from conference paper
+  {\bf Introduction to doubling}. A useful understanding of an algorithm's efficiency, the worst-case time complexity
 gives an upper bound on how an increase in the size of the input, denoted $n$, increases the execution time of the
 algorithm, $f(n)$.  This relationship is often expressed in the ``big-Oh'' notation, where $f(n)$ is $O(g(n))$ means
 that the time increases by no more than on order of $g(n)$. Since the worst-case complexity of an algorithm is evident
@@ -91,7 +89,7 @@ corresponding ratios.
 
 \end{table}
 
-\section{\toolname}
+{\bf Automatic doubling}.
     ``\toolname'' \cite{kinneer2015,tool} is a tool to derive an
     ``EXPerimental bigOh'' for supporting ``Scalability Evaluation''.
     \toolname infers an algorithm's big-Oh order of growth by
@@ -138,7 +136,7 @@ corresponding ratios.
     % TODO fix informal language here
     % the tone I would use when presenting the demo, not sure if
     % appropriate for the tool paper
-    \subsection{Implementation}
+    {\bf Implementation}.
     \toolname is implemented as an abstract class in the Java
     programming language.  To use \toolname to evaluate your own
     algorithm $A$, you need only extend the \textit{DoublingExperiment}
@@ -168,7 +166,7 @@ corresponding ratios.
     \label{fig:qsprogram}
     \end{figure}
 
-    \subsection{Case study: sorting algorithms}
+    {\bf Case study: sorting algorithms}.
     \lstset{language=bash}
     Included with the \toolname tool is an example doubling
     experiment called \texttt{SortingExperiment}.  This program provides a number
@@ -179,7 +177,7 @@ corresponding ratios.
     algorithm. Running the command without providing \texttt{algname}
     will show a list of the available options.
 
-    \subsection{Case study: \textit{SchemaAnalyst}}
+    {\bf Case study: \textit{SchemaAnalyst}}
     In \cite{kinneer2015}, we use \toolname to perform a
     comprehensive analysis on the search-based test data generation 
     tool \textit{SchemaAnalyst} \cite{kapfhammer2013}, that generates
@@ -217,9 +215,11 @@ Options:
     schema, and according to the number of \textsc{NotNull}s present in the
     schema can be run by the following command:
     \texttt{java SchemaExperiment -criterion AICC -datagenerator random -schema RiskIt -doubler DoubleNotNullsSemantic}
-    \subsection{Deploying on an HPC cluster}
+
+{\bf Deploying on an HPC cluster}.
+
     % this is all Chris if we include it
-\section{Parameter Tuning}
+ {\bf Parameter Tuning}.
   While \toolname greatly eases the process of conducting
   doubling experiments, its accuracy and performance is
   sensitive to the settings of the system's parameters.  In particular,
@@ -238,7 +238,7 @@ Options:
   \textit{tolerance} threshold until \toolname is able to reliably 
   infer the big-Oh complexity of the algorithms.
 
-\section{Future Work and Conclusion} 
+{\bf Future Work and Conclusion}.
   While we recently used \toolname to study search-based test data
   generation in the domain of relational database schemas, the tool is
   general and can be applied to many other problems. Future work
