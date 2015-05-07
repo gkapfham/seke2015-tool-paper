@@ -22,20 +22,22 @@
 \usepackage{bibspacing}
 \usepackage{listings}
 
+\usepackage{xspace}
+
 \usepackage[small,compact]{titlesec}
 % \usepackage{titlesec}
 
 \newcommand{\goallegheny}{$^{\mbox{\footnotesize \ding{72}}}$}
 \newcommand{\gosheffield}{$^{\mbox{\footnotesize \ding{73}}}$}
 \newcommand{\gospace}{$\;$}
-
+\newcommand{\toolname}{{\sc EASE}\xspace}
 
 
 \begin{document}
 \lstset{language=Java}
 
-\title{\vspace*{-.6in}AERATE - A tool for Automated EmpRical
-AsymTotic Evalution\vspace*{-.1in}}
+\title{\vspace*{-.6in}\toolname: Inferring worst-case time complexity by
+an automated empirical study \vspace*{-.1in}}
 
 \author{Cody Kinneer \goallegheny                \and
         Gregory M.\ Kapfhammer \goallegheny      \and
@@ -50,12 +52,8 @@ AsymTotic Evalution\vspace*{-.1in}}
 
 \maketitle
 
-\begin{abstract}
-% Do we even need this? I don't know
-\end{abstract}
-
 %TODO cite the main paper (somewhere)
-\section{Basic Introduction to Doubling}
+\section{Introduction to Doubling}
   
   % Blatantly copied from conference paper
 
@@ -93,25 +91,25 @@ corresponding ratios.
 
 \end{table}
 
-\section{Description of Tool}
-    \textit{AERATE} \cite{kinneer2015,tool} is a tool for
+\section{\toolname}
+    \toolname \cite{kinneer2015,tool} is a tool for
     determining an algorithms big-Oh order of growth by
     conducting a doubling experiment automatically.  In order to
-    evaluate an algorithm $A$, \textit{AERATE} takes as input two
+    evaluate an algorithm $A$, \toolname takes as input two
     functions. The first is a timing function $T(n)$ that runs an
     implementation of $A$ on the provided input $n$ and returns
     the runtime, and the second is a doubling function $D(n)$ that
     accepts an input for $A$ and returns an input $2n$ twice as
     complex as the original. Once the functions have been supplied,
-    \textit{AERATE} needs an initial input $n$ for $A$, and will then 
+    \toolname needs an initial input $n$ for $A$, and will then 
     output $x$ where $A \in O(x)$.
 
-    \textit{AERATE} infers the worst-case time complexity of the $A$ by
+    \toolname infers the worst-case time complexity of the $A$ by
     repeatedly doubling $n$ until $n$ is large enough that the
-    worst-case time complexity of $A$ is apparent.  \textit{AERATE}
+    worst-case time complexity of $A$ is apparent.  \toolname
     determines when $n$ is large enough by monitoring the doubling
     ratio $\frac{T(2n)}{T(n)}$ for multiple iterations of doubling.
-    Using a convergence algorithm, \textit{AERATE} stops doubling $n$
+    Using a convergence algorithm, \toolname stops doubling $n$
     when the doubling ratio reaches a quiescent state.
    
   % Blatantly copied from conference paper
@@ -129,7 +127,7 @@ corresponding ratios.
   time that it takes to sort a list of size $1, 2, 4, 8, \dots 128$
   might not even be distinguishable. This would appear to converge to 1, which 
   indicates constant time complexity. To prevent the experiment from incorrectly terminating
-  given a small starting $n$, \textit{AERATE} requires that a program under study display a ratio of 1 for a
+  given a small starting $n$, \toolname requires that a program under study display a ratio of 1 for a
   $\mathit{minimum}$ number of times before judging that the ratio does in fact converge to 1.  That is, if $r_c = 1$,
   $t > \mathit{minimum}$ must be true, in addition to the tolerance test, before the experiment is declared convergent.
   The $\mathit{minimum}$ parameter is also a configurable parameter.  Because a doubling ratio of 1 signifies
@@ -140,8 +138,8 @@ corresponding ratios.
     % the tone I would use when presenting the demo, not sure if
     % appropriate for the tool paper
     \subsection{Implementation}
-    \textit{AERATE} is implemented as an abstract class in the Java
-    programming language.  To use \textit{AERATE} to evaluate your own
+    \toolname is implemented as an abstract class in the Java
+    programming language.  To use \toolname to evaluate your own
     algorithm $A$, you need only extend the \textit{DoublingExperiment}
     class to provide your own $T$ and $D$ functions.  $T$ should be
     implemented by providing a \lstinline$double timedTest()$ method, and $D$
@@ -162,15 +160,16 @@ corresponding ratios.
 
     % we can cut this, but it does show how easy the tool makes things
     
-    \begin{figure}[h!]
+    \begin{figure}[t]
     \lstinputlisting[basicstyle=\scriptsize]{content/QuickSortTrimmed.java}
     \caption{A simple Java class that performs a performance evaluation
     on the QuickSort algorithm.}
     \label{fig:qsprogram}
     \end{figure}
+
     \subsection{Case study: sorting algorithms}
     \lstset{language=bash}
-    Included with the \textit{AERATE} tool is an example doubling
+    Included with the \toolname tool is an example doubling
     experiment called \texttt{SortingExperiment}.  This program provides a number
     of canonical sorting algorithms with well known worst-case time
     complexities.  Doubling experiments may be run on these algorithms
@@ -180,7 +179,7 @@ corresponding ratios.
     will show a list of the available options.
 
     \subsection{Case study: \textit{SchemaAnalyst}}
-    In \cite{kinneer2015}, we use \textit{AERATE} to perform a
+    In \cite{kinneer2015}, we use \toolname to perform a
     comprehensive analysis on the search-based test data generation 
     tool \textit{SchemaAnalyst} \cite{kapfhammer2013}, that generates
     test suites for relational database schemas. Since this tool is more
@@ -190,7 +189,7 @@ corresponding ratios.
     that extends \texttt{DoublingExperiment}.  We developed 
     \texttt{SchemaExperiment} to allow for conducting doubling
     experiments using a variety of \textit{SchemaAnalyst} configurations,
-    as well as exposing \textit{AERATE}'s parameters.
+    as well as exposing \toolname's parameters.
 {\scriptsize
 \begin{verbatim}
  Usage: <java SchemaExperiment> [options]
@@ -220,7 +219,7 @@ Options:
     \subsection{Deploying on an HPC cluster}
     % this is all Chris if we include it
 \section{Parameter Tuning}
-  While \textit{AERATE} greatly eases the process of conducting
+  While \toolname greatly eases the process of conducting
   doubling experiments, its accuracy and performance is
   sensitive to the settings of the system's parameters.  In particular,
   the $\mathit{tolerance}$ and $\mathit{lookback}$ values can result in
@@ -231,17 +230,25 @@ Options:
   characteristics of the implementation being studied.
 
   The reliability of the tool and repeatability of results would be
-  improved if \textit{AERATE} could select good settings for these
+  improved if \toolname could select good settings for these
   parameters automatically. A reasonable parameter tuning strategy could
-  be to run \textit{AERATE} on various algorithms of known worst-case
+  be to run \toolname on various algorithms of known worst-case
   time complexities (such as the sorting algorithms) and lower the
-  \textit{tolerance} threshold until \textit{AERATE} is able to reliably 
-  infer the big-Oh complexity of the algorithms. 
+  \textit{tolerance} threshold until \toolname is able to reliably 
+  infer the big-Oh complexity of the algorithms.
 
-\section{Conclusion}
-  \textit{AERATE} makes empirically evaluating the worst-case time
+\section{Future Work and Conclusion} 
+  While we recently used \toolname to study search-based test data
+  generation in the domain of relational database schemas, the tool is
+  general and can be applied to many other problems. Future work
+  includes using \toolname to evaluate test-data generation for Java
+  programs.
+
+  % TODO should I cite EvoSuite?
+
+  \toolname makes empirically evaluating the worst-case time
   complexity of algorithms much more convenient. By automating the
-  process of conducting these experiments, \textit{AERATE} enables large
+  process of conducting these experiments, \toolname enables large
   scale empirical studies that would otherwise be infeasible.
 
 % \titleformat{\chapter}{\huge\bf}{}{10pt}{\arabic{chapter} \ }[\titlerule]
