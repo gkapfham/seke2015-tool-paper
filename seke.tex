@@ -93,12 +93,12 @@ corresponding ratios.
 
 \section{\toolname}
     \toolname \cite{kinneer2015,tool} is a tool for
-    determining an algorithms big-Oh order of growth by
+    determining an algorithm's big-Oh order of growth by
     conducting a doubling experiment automatically.  In order to
     evaluate an algorithm $A$, \toolname takes as input two
-    functions. The first is a timing function $T(n)$ that runs an
+    functions. The first is a timing function $f(n)$ that runs an
     implementation of $A$ on the provided input $n$ and returns
-    the runtime, and the second is a doubling function $D(n)$ that
+    the runtime, and the second is a doubling function $d(n)$ that
     accepts an input for $A$ and returns an input $2n$ twice as
     complex as the original. Once the functions have been supplied,
     \toolname needs an initial input $n$ for $A$, and will then 
@@ -108,7 +108,7 @@ corresponding ratios.
     repeatedly doubling $n$ until $n$ is large enough that the
     worst-case time complexity of $A$ is apparent.  \toolname
     determines when $n$ is large enough by monitoring the doubling
-    ratio $\frac{T(2n)}{T(n)}$ for multiple iterations of doubling.
+    ratio $\frac{f(2n)}{f(n)}$ for multiple iterations of doubling.
     Using a convergence algorithm, \toolname stops doubling $n$
     when the doubling ratio reaches a quiescent state.
    
@@ -130,7 +130,7 @@ corresponding ratios.
   given a small starting $n$, \toolname requires that a program under study display a ratio of 1 for a
   $\mathit{minimum}$ number of times before judging that the ratio does in fact converge to 1.  That is, if $r_c = 1$,
   $t > \mathit{minimum}$ must be true, in addition to the tolerance test, before the experiment is declared convergent.
-  The $\mathit{minimum}$ parameter is also a configurable parameter.  Because a doubling ratio of 1 signifies
+  The $\mathit{minimum}$ value is also a configurable parameter.  Because a doubling ratio of 1 signifies
   constant or logarithmic time complexity, requiring these doubles does not significantly increase the experimentation
   time needed, all the while providing further assurance that a small ratio is not due to an insufficiently small $n$.
 
@@ -141,9 +141,9 @@ corresponding ratios.
     \toolname is implemented as an abstract class in the Java
     programming language.  To use \toolname to evaluate your own
     algorithm $A$, you need only extend the \textit{DoublingExperiment}
-    class to provide your own $T$ and $D$ functions.  $T$ should be
-    implemented by providing a \lstinline$double timedTest()$ method, and $D$
-    should be implemented by providing a \lstinline$void doubleN()$
+    class to provide your own $f$ and $d$ functions.  $f$ should be
+    implemented by providing a \lstinline$double timedTest()$ method,
+    and $d$ should be implemented by providing a \lstinline$void doubleN()$
     method. Note that these methods do not accept any parameters,
     and only \lstinline$timedTest()$ returns a value. The programmer
     must ensure that \lstinline$timedTest()$ returns the runtime for the
