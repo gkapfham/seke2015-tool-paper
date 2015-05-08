@@ -36,8 +36,8 @@
 \begin{document}
 \lstset{language=Java}
 
-\title{\vspace*{-.6in}\toolname: Inferring worst-case time complexity by
-an automated empirical study \vspace*{-.1in}}
+\title{\vspace*{-.6in}\toolname: Inferring Worst-case Time Complexity by
+Automatic Empirical Study\vspace*{-.1in}}
 
 \author{Cody Kinneer \goallegheny                \and
         Gregory M.\ Kapfhammer \goallegheny      \and
@@ -71,7 +71,7 @@ algorithm under study is $O(n)$ or $O(n\log n)$.  Table~\ref{table:ratios} shows
 corresponding ratios.
 
 \begin{table}[h!]
-  \vspace*{-.15in}
+  \vspace*{-.10in}
   \begin{center}
     \begin{tabular}{c|l}
       Ratio $f(2n)/f(n)$ & Worst-Case Conclusion              \\ \hline
@@ -85,7 +85,7 @@ corresponding ratios.
   \vspace*{-.25in}
 
   \caption{Conclusions for worst-case time complexity.}~\label{table:ratios}
-  \vspace*{-.35in}
+  \vspace*{-.30in}
 
 \end{table}
 
@@ -99,9 +99,8 @@ corresponding ratios.
     implementation of $A$ on the provided input $n$ and returns
     the runtime, and the second is a doubling function $d(n)$ that
     accepts an input for $A$ and returns an input $2n$ twice as
-    complex as the original. Once the functions have been supplied,
-    \toolname needs an initial input $n$ for $A$, and will then 
-    output $x$ where $A \in O(x)$.
+    large. After providing \toolname an initial input $n$, the tool
+    will output $A$'s big-Oh order of growth.
 
     \toolname infers the worst-case time complexity of the $A$ by
     repeatedly doubling $n$ until $n$ is large enough that the
@@ -162,7 +161,7 @@ corresponding ratios.
     \begin{figure}[t]
     \lstinputlisting[basicstyle=\scriptsize]{content/QuickSortTrimmed.java}
     \caption{A simple Java class that performs a performance evaluation
-    on the QuickSort algorithm.}
+    on the QuickSort algorithm.}\vspace{-0.20in}
     \label{fig:qsprogram}
     \end{figure}
 
@@ -175,7 +174,7 @@ corresponding ratios.
     by running the command \texttt{java SortingExperiment algname},
     replacing \texttt{algname} with the name of the desired sorting
     algorithm. Running the command without providing \texttt{algname}
-    will show a list of the available options.
+    will show a list of options.
 
     {\bf Case study: \textit{SchemaAnalyst}}
     In \cite{kinneer2015}, we use \toolname to perform a
@@ -188,7 +187,8 @@ corresponding ratios.
     that extends \texttt{DoublingExperiment}.  We developed 
     \texttt{SchemaExperiment} to allow for conducting doubling
     experiments using a variety of \textit{SchemaAnalyst} configurations,
-    as well as exposing \toolname's parameters.
+    as well as accessing \toolname's parameters.
+
 {\scriptsize
 \begin{verbatim}
  Usage: <java SchemaExperiment> [options]
@@ -216,9 +216,19 @@ Options:
     schema can be run by the following command:
     \texttt{java SchemaExperiment -criterion AICC -datagenerator random -schema RiskIt -doubler DoubleNotNullsSemantic}
 
+    % is parallel co
 {\bf Deploying on an HPC cluster}.
+Since the performance of \textit{SchemaAnalyst} may depend on a number
+of factors (i.e. criterion, data generator, schema, doubling strategy) a
+comprehensive survey of the parameter space may be conducted by
+performing a doubling experiment for each configuration. While
+computationally expensive, an experiment of this scale is possible by
+using an HPC cluster. Each doubling experiment can be run independently
+on a separate node of the cluster, and the resulting data can be combined
+for analysis. Data mining techniques can then be leveraged to interpret
+the performance trade-offs.
 
-    % this is all Chris if we include it
+
  {\bf Parameter Tuning}.
   While \toolname greatly eases the process of conducting
   doubling experiments, its accuracy and performance is
