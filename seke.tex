@@ -108,7 +108,7 @@ corresponding ratios.
     determines when $n$ is large enough by monitoring the doubling
     ratio $\frac{f(2n)}{f(n)}$ for multiple iterations of doubling.
     Using a convergence algorithm, \toolname stops doubling $n$
-    when the doubling ratio reaches a quiescent state.
+    when the doubling ratio reaches a stable value.
    
   % Blatantly copied from conference paper
   To test for convergence, for every time $t$, where $t$ denotes the number of times the input has been doubled, we
@@ -140,16 +140,16 @@ corresponding ratios.
     programming language.  To use \toolname to evaluate your own
     algorithm $A$, you need only extend the \textit{DoublingExperiment}
     class to provide your own $f$ and $d$ functions.  $f$ should be
-    implemented by providing a \lstinline$double timedTest()$ method,
-    and $d$ should be implemented by providing a \lstinline$void doubleN()$
+    implemented by providing a \texttt{double timedTest()} method,
+    and $d$ should be implemented by providing a \texttt{void doubleN()}
     method. Note that these methods do not accept any parameters,
-    and only \lstinline$timedTest()$ returns a value. The programmer
-    must ensure that \lstinline$timedTest()$ returns the runtime for the
-    current input size, and that when \lstinline$doubleN()$ is called,
+    and only \texttt{timedTest()} returns a value. The programmer
+    must ensure that \texttt{timedTest()} returns the runtime for the
+    current input size, and that when \texttt{doubleN()} is called,
     the input size is doubled.  Actually initializing and storing the
     input should be handled by the specific implementation. The
-    \lstinline$runExperiment()$ method can then be called to to conduct
-    a doubling experiment, and the \lstinline$printBigOh()$ method can
+    \texttt{runExperiment()} method can then be called to to conduct
+    a doubling experiment, and the \texttt{printBigOh()} method can
     be called to show the result. Figure~\ref{fig:qsprogram} shows an
     implementation that conducts a doubling experiment on the QuickSort
     algorithm.
@@ -160,6 +160,7 @@ corresponding ratios.
     
     \begin{figure}[t]
     \lstinputlisting[basicstyle=\scriptsize]{content/QuickSortTrimmed.java}
+    \vspace{-0.15in}
     \caption{A simple Java class that performs a performance evaluation
     on the QuickSort algorithm.}\vspace{-0.20in}
     \label{fig:qsprogram}
@@ -169,7 +170,7 @@ corresponding ratios.
     \lstset{language=bash}
     Included with the \toolname tool is an example doubling
     experiment called \texttt{SortingExperiment}.  This program provides a number
-    of canonical sorting algorithms with well known worst-case time
+    of canonical sorting algorithms with well-known worst-case time
     complexities.  Doubling experiments may be run on these algorithms
     by running the command \texttt{java SortingExperiment algname},
     replacing \texttt{algname} with the name of the desired sorting
@@ -179,9 +180,9 @@ corresponding ratios.
     {\bf Case study: \textit{SchemaAnalyst}}
     In other work \cite{kinneer2015}, we used \toolname to perform a
     comprehensive analysis on the search-based test data generation 
-    tool \textit{SchemaAnalyst} \cite{kapfhammer2013}, that generates
-    test suites for relational database schemas. Since this tool is more
-    complicated than quicksort, performing doubling experiments on
+    tool \textit{SchemaAnalyst} \cite{kapfhammer2013} that generates
+    test suites for relational database schemas. Since this tool is much 
+    more complicated than a sorting algorithm, performing doubling experiments on
     \textit{SchemaAnalyst} requires more parameters.  To conduct these
     experiments, we developed a class called \texttt{SchemaExperiment}
     that extends \texttt{DoublingExperiment}.  We developed 
@@ -198,14 +199,12 @@ Options:
  -datagenerator     Select which data generator to use 
  -doubler           Select which schemaDoubler to use 
  -convergence       Experiment convergent if differance < tolerance 
- -lookBack          Number of ratios to compair for convergence 
+ -lookBack          Number of ratios to compare for convergence 
  -tuningTries       Minimum number of times to doubles before O(1)  
  -minDoubles        Minimum number of doubles to try 
- -noTune            Disable trying to break out of O(1) 
  -giveUp, -maxTime  Max time for a single trial in hours 
  -help, -usage      Display command line options 
  -o, -out, -csv     Name of the csv file to save data to 
- -overwrite         Overwrite existing CSV rather than append 
  -verbose, -debug   Display verbose output 
 \end{verbatim}
 }
@@ -219,7 +218,7 @@ Options:
     % is parallel co
 {\bf Deploying on an HPC cluster}.
 Since the performance of \textit{SchemaAnalyst} may depend on a number
-of factors (i.e. criterion, data generator, schema, doubling strategy) a
+of factors (i.e., criterion, data generator, schema, doubling strategy) a
 comprehensive survey of the parameter space may be conducted by
 performing a doubling experiment for each configuration. While
 computationally expensive, an experiment of this scale is possible by
@@ -237,7 +236,7 @@ the performance trade-offs.
   a doubling experiment terminating prematurely or continuing
   indefinitely.
   To complicate the issue further, the parameters must be re-tuned based
-  on hardware abilities of the machine being used and the performance
+  on hardware abilities of the machine(s) being used and the performance
   characteristics of the implementation being studied.
 
   The reliability of the tool and repeatability of results would be
@@ -250,7 +249,8 @@ the performance trade-offs.
 
 {\bf Future Work and Conclusion}.
   While we recently used \toolname to study search-based test data
-  generation in the domain of relational database schemas, the tool is
+  generation in the domain of relational database
+  schemas~\cite{kinneer2015}, the tool is
   general and can be applied to many other problems. Future work
   includes using \toolname to evaluate test data generation for Java
   programs.
@@ -259,8 +259,8 @@ the performance trade-offs.
 
   \toolname makes empirically evaluating the worst-case time
   complexity of algorithms much more convenient. By automating the
-  process of conducting these experiments, \toolname enables large
-  scale empirical studies that would otherwise be infeasible.
+  process of conducting these experiments, \toolname enables large-scale
+  empirical studies that would otherwise be infeasible.
 
 % \titleformat{\chapter}{\huge\bf}{}{10pt}{\arabic{chapter} \ }[\titlerule]
 \setlength{\bibitemsep}{.075in}

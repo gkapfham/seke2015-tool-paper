@@ -9,6 +9,4 @@ public class QuickSortExp extends DoublingExperiment{
         long startTime = System.nanoTime();
         QuickSort.quickSort(n, n.length);
         long endTime = System.nanoTime();
-        return (double) endTime - startTime;
-    }
-}
+        return (double) endTime - startTime; } }
