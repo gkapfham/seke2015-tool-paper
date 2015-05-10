@@ -5,11 +5,11 @@ algorithm, $f(n)$.  This relationship is often expressed in the ``big-Oh'' notat
 that the time increases by no more than on order of $g(n)$. Since the worst-case complexity of an algorithm is evident
 when $n$ is large~\cite{mcgeoch2012}, one approach for determining the big-Oh complexity of an algorithm is to conduct
 a doubling experiment with increasingly bigger input sizes. By measuring the time needed to run the algorithm on an
-input of size $n$ and the time needed to run with input of size $2n$, the algorithm's order of growth can be
+input $n$ and an input $2n$ twice as large, the algorithm's order of growth can be
 empirically determined~\cite{mcgeoch2012}.
 
 The goal of a doubling experiment is to draw a conclusion regarding the efficiency of the algorithm from the ratio
-$f(2n)/f(n)$ that represents the factor of change in runtime from input sizes $n$ to $2n$. For instance, a ratio of $2$
+$f(2n)/f(n)$ that represents the factor of change in runtime from inputs $n$ and $2n$. For instance, a ratio of $2$
 would indicate that doubling the input size resulted in the runtime's doubling, thus leading to the conclusion that the
 algorithm under study is $O(n)$ or $O(n\log n)$.  Table~\ref{table:ratios} shows some common time complexities and their
 corresponding ratios.
