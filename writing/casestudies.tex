@@ -1,45 +1,46 @@
-    {\bf Case study: sorting algorithms}.
     \lstset{language=bash}
-    Included with the \toolname tool is an example doubling
-    experiment called \texttt{SortingExperiment}.  This program provides a number
-    of canonical sorting algorithms with well-known worst-case time
-    complexities.  Doubling experiments may be run on these algorithms
-    by running the command \texttt{java SortingExperiment algname},
-    replacing \texttt{algname} with the name of the desired sorting
-    algorithm. Running the command without providing \texttt{algname}
-    will show a list of options. When run 1000 times for each of the
-    five provided sorting algorithms, \toolname achieves $98.84\%$
-    accuracy.
 
-    {\bf Case study: \textit{SchemaAnalyst}}
-    In other work \cite{kinneer2015}, we used \toolname to perform a
-    comprehensive analysis on the search-based test data generation 
-    tool \textit{SchemaAnalyst} \cite{kapfhammer2013} that generates
-    test suites for relational database schemas. Since this tool is much 
-    more complicated than a sorting algorithm, performing doubling experiments on
-    \textit{SchemaAnalyst} requires more parameters.  To conduct these
-    experiments, we developed a class called \texttt{SchemaExperiment}
-    that extends \texttt{DoublingExperiment}.  We developed 
-    \texttt{SchemaExperiment} to allow for conducting doubling
-    experiments using a variety of \textit{SchemaAnalyst} configurations,
-    as well as accessing \toolname's parameters.
+    {\bf Case study: Sorting Algorithms}.  Included with the
+    \toolname~tool is an example doubling experiment called
+    \texttt{SortingExperiment}.  This program provides a number of
+    canonical sorting algorithms with well-known worst-case time
+    complexities.  Doubling experiments may be performed on these
+    algorithms by running the command \texttt{java SortingExperiment
+    algname}, replacing \texttt{algname} with the name of the desired
+    sorting algorithm. Running the command without providing
+    \texttt{algname} will show a list of options. When run 1000 times
+    for each of the five provided sorting algorithms, \toolname~achieve
+    an accuracy of $98.84\%$.
+
+    {\bf Case study: \textit{SchemaAnalyst}} In other
+    work~\cite{kinneer2015}, we used \toolname~to perform a
+    comprehensive analysis on the search-based test data generation tool
+    \textit{SchemaAnalyst}~\cite{kapfhammer2013} that generates test
+    suites for relational database schemas. Since this tool is much more
+    complicated than a sorting algorithm, performing doubling
+    experiments on \textit{SchemaAnalyst} requires more parameters.  To
+    conduct these experiments, we developed a class called
+    \texttt{SchemaExperiment} that extends \texttt{DoublingExperiment}.
+    We developed \texttt{SchemaExperiment} to allow for conducting
+    doubling experiments using a variety of \textit{SchemaAnalyst}
+    configurations, as well as accessing \toolname's parameters.
 
 {\scriptsize
 \begin{verbatim}
  Usage: <java SchemaExperiment> [options]
-Options:  
- -schema, -s        Select which schema to use 
- -criterion         Select which criterion to use 
- -datagenerator     Select which data generator to use 
- -doubler           Select which schemaDoubler to use 
- -convergence       Experiment convergent if differance < tolerance 
- -lookBack          Number of ratios to compare for convergence 
- -tuningTries       Minimum number of times to doubles before O(1)  
- -minDoubles        Minimum number of doubles to try 
- -giveUp, -maxTime  Max time for a single trial in hours 
- -help, -usage      Display command line options 
- -o, -out, -csv     Name of the csv file to save data to 
- -verbose, -debug   Display verbose output 
+Options:
+ -schema, -s        Select which schema to use
+ -criterion         Select which criterion to use
+ -datagenerator     Select which data generator to use
+ -doubler           Select which schemaDoubler to use
+ -convergence       Experiment convergent if differance < tolerance
+ -lookBack          Number of ratios to compare for convergence
+ -tuningTries       Minimum number of times to doubles before O(1)
+ -minDoubles        Minimum number of doubles to try
+ -giveUp, -maxTime  Max time for a single trial in hours
+ -help, -usage      Display command line options
+ -o, -out, -csv     Name of the csv file to save data to
+ -verbose, -debug   Display verbose output
 \end{verbatim}
 }
 
