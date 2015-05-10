@@ -45,9 +45,11 @@ Options:
 \end{verbatim}
 }
 
-    A doubling experiment that evaluates \textit{SchemaAnalyst} using
-    the AICC coverage criterion, random data generator, RiskIt as the initial input
-    schema, and according to the number of \textsc{NotNull}s present in the
-    schema can be run by the following command:
-    \texttt{java SchemaExperiment -criterion AICC -datagenerator random
-    -schema RiskIt -doubler DoubleNotNullsSemantic}.
+Following the terminology from~\cite{kempka2015}, a doubling experiment
+that evaluates \textit{SchemaAnalyst} using the AICC coverage criterion,
+a random data generator, the RiskIt database schema, and according to
+the number of \texttt{NOT NULL}s present in the schema can be run by the
+following command: \texttt{java SchemaExperiment -criterion AICC
+-datagenerator random -schema RiskIt -doubler DoubleNotNullsSemantic}.
+
+
