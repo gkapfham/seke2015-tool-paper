@@ -2,29 +2,28 @@
     % the tone I would use when presenting the demo, not sure if
     % appropriate for the tool paper
 
-    {\bf Implementation}.
-    \toolname is implemented as an abstract class in the Java
-    programming language.  To use \toolname to evaluate your own
-    algorithm $A$, you need only extend the \textit{DoublingExperiment}
-    class to provide your own $f$ and $d$ functions.  The $f$ function should be
-    implemented by providing a \texttt{double timedTest()} method,
-    and $d$ should be implemented by providing a \texttt{void doubleN()}
-    method. Note that these methods do not accept any parameters,
-    and only \texttt{timedTest()} returns a value. The programmer
-    must ensure that \texttt{timedTest()} returns the runtime for the
-    current input size, and that when \texttt{doubleN()} is called,
-    the input size is doubled.  Actually initializing and storing the
-    input should be handled by the specific implementation. The
-    \texttt{runExperiment()} method can then be called to to conduct
-    a doubling experiment, and the \texttt{printBigOh()} method can
-    be called to show the result. Figure~\ref{fig:qsprogram} shows an
-    implementation that conducts a doubling experiment on the QuickSort
-    algorithm.
+    {\bf Implementation}.  \toolname is implemented as an abstract class
+    in the Java programming language.  To use \toolname to evaluate a
+    new algorithm $A$, you need only extend the
+    \texttt{DoublingExperiment} class to provide your own $f$ and $d$
+    functions.  The $f$ function should be implemented by providing a
+    \texttt{double timedTest()} method, and $d$ should be implemented by
+    providing a \texttt{void doubleN()} method. Note that these methods
+    do not accept any parameters, and only \texttt{timedTest()} returns
+    a value. The programmer must ensure that \texttt{timedTest()}
+    returns the runtime for the current input size, and that when
+    \texttt{doubleN()} is called, the input size is doubled.
+    Initializing and storing the input should be handled by the specific
+    implementation. The \texttt{runExperiment()} method can be called to
+    to conduct a doubling experiment and \texttt{printBigOh()} can be
+    called to show the result. Figure~\ref{fig:qsprogram} shows an
+    complete Java class that conducts a doubling experiment on QuickSort;
+    note the simplicity of the implementation when using \toolname.
 
     %TODO GMK: do we need to cite the quicksort implementation anywhere?
 
     % we can cut this, but it does show how easy the tool makes things
-    
+
     \begin{figure}[t]
     \lstinputlisting[basicstyle=\scriptsize]{content/QuickSortTrimmed.java}
     \vspace{-0.15in}
