@@ -6,18 +6,17 @@
     conducting a doubling experiment automatically.  In order to
     evaluate an algorithm $A$, \toolname takes as input two
     functions. The first is a timing function $f(n)$ that runs an
-    implementation of $A$ on the provided input $n$ and returns
+    implementation of $A$ on the provided input of size $n$ and returns
     the runtime, and the second is a doubling function $d(n)$ that
-    accepts an input for $A$ and returns an input $2n$ twice as
-    large. After providing \toolname an initial input $n$, the tool
-    will output $A$'s big-Oh order of growth.
+    accepts an input for $A$ and returns an input of size $2n$. After providing \toolname an initial input, the tool
+    will output an inferred big-Oh order of growth for $A$.
 
-    \toolname infers the worst-case time complexity of $A$ by
+    \toolname derives the worst-case time complexity of $A$ by
     repeatedly doubling $n$ until $n$ is large enough that the
     worst-case time complexity of $A$ is apparent.  \toolname
     determines when $n$ is large enough by monitoring the doubling
     ratio $\frac{f(2n)}{f(n)}$ for multiple iterations of doubling.
-    Using a convergence algorithm, \toolname stops doubling $n$
+    Using a convergence algorithm, \toolname stops the doubling experiment
     when the doubling ratio reaches a stable value.
    
   % Blatantly copied from conference paper
