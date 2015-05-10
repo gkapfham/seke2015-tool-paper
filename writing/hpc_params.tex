@@ -12,22 +12,19 @@ for analysis. Data mining techniques can then be leveraged to interpret
 the performance trade-offs.
 
 
- {\bf Parameter Tuning}.
-  While \toolname greatly eases the process of conducting
-  doubling experiments, its accuracy and performance is
-  sensitive to the settings of the system's parameters.  In particular,
-  the $\mathit{tolerance}$ and $\mathit{lookback}$ values can result in
-  a doubling experiment terminating prematurely or continuing
-  indefinitely.
-  To complicate the issue further, the parameters must be re-tuned based
-  on hardware abilities of the machine(s) being used and the performance
-  characteristics of the implementation being studied.
+ {\bf Parameter Tuning}.  While \toolname greatly eases the process of
+ conducting doubling experiments, its accuracy and performance is sensitive to
+ the settings of the system's parameters.  In particular, the
+ $\mathit{tolerance}$ and $\mathit{lookback}$ values can result in a doubling
+ experiment terminating prematurely or continuing indefinitely.  To complicate
+ the issue further, the parameters must be re-tuned based on hardware
+ properties of the machine(s) being used and the performance characteristics of
+ the implementation being studied.
 
-  The reliability of the tool and repeatability of results would be
-  improved if \toolname could select good settings for these
-  parameters automatically. A reasonable parameter tuning strategy could
-  be to run \toolname on various algorithms of known worst-case
-  time complexities (such as the sorting algorithms) and lower the
-  \textit{tolerance} threshold until \toolname is able to reliably 
-  infer the big-Oh complexity of the algorithms.
+  The reliability of the tool and repeatability of its results would be further
+  improved if \toolname could select good settings for these parameters
+  automatically. A reasonable parameter tuning strategy could be to run
+  \toolname on various algorithms of known worst-case time complexities (such
+  as the sorting algorithms) and lower the \textit{tolerance} threshold until
+  \toolname reliably infers the big-Oh time complexities.
 
