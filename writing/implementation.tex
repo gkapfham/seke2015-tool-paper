@@ -2,9 +2,9 @@
     % the tone I would use when presenting the demo, not sure if
     % appropriate for the tool paper
 
-    {\bf Implementation}.  \toolname is implemented as an abstract class
-    in the Java programming language.  To use \toolname to evaluate a
-    new algorithm $A$, you need only extend the
+    {\bf Implementation}.  \toolname is implemented as a package of
+    classes in the Java programming language.  To use \toolname to
+    evaluate a new algorithm $A$, you need only extend the
     \texttt{DoublingExperiment} class to provide your own $f$ and $d$
     functions.  The $f$ function should be implemented by providing a
     \texttt{double timedTest()} method, and $d$ should be implemented by
@@ -17,8 +17,9 @@
     implementation. The \texttt{runExperiment()} method can be called to
     to conduct a doubling experiment and \texttt{printBigOh()} can be
     called to show the result. Figure~\ref{fig:qsprogram} shows an
-    complete Java class that conducts a doubling experiment on QuickSort;
-    note the simplicity of the implementation when using \toolname.
+    complete Java class that conducts a doubling experiment on
+    QuickSort; note the simplicity of the implementation when using
+    \toolname.
 
     %TODO GMK: do we need to cite the quicksort implementation anywhere?
 
