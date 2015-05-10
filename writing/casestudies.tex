@@ -47,13 +47,16 @@ Options:
 \end{verbatim}
 }
 
-    \vspace*{-.075in}
+\vspace*{-.075in}
 
 Following the terminology from~\cite{kempka2015}, a doubling experiment
-that evaluates \textit{SchemaAnalyst} using the AICC coverage criterion,
-a random data generator, the RiskIt database schema, and according to
-the number of \texttt{NOT NULL}s present in the schema can be run by the
-following command: \texttt{java SchemaExperiment -criterion AICC
--datagenerator random -schema RiskIt -doubler DoubleNotNullsSemantic}.
+to evaluate \textit{SchemaAnalyst} using the AICC criterion, a random
+data generator, the RiskIt database schema, and the number of
+\texttt{NOT NULL}s in the schema will run with this command:
+\texttt{java SchemaExperiment -criterion AICC -datagenerator random
+-schema RiskIt -doubler DoubleNotNullsSemantic}.  Although less accurate
+than in the sorting case study, \toolname~still successfully revealed
+meaningful trends in \textit{SchemaAnalyst}'s
+performance~\cite{kinneer2015}.
 
 
