@@ -4,7 +4,7 @@
 
     {\bf Implementation}.  \toolname is implemented as a package of
     classes in the Java programming language~\cite{tool}.  To use \toolname to
-    evaluate a new algorithm $A$, you need only extend the
+    evaluate a new algorithm $A$, you only need to extend the
     \texttt{DoublingExperiment} class to provide your own $f$ and $d$
     functions.  The $f$ function should be implemented by providing a
     \texttt{double timedTest()} method, and $d$ should be implemented by
@@ -15,7 +15,7 @@
     \texttt{doubleN()} is called, the input size is doubled.
     Initializing and storing the input should be handled by the specific
     implementation. The \texttt{runExperiment()} method can be called to
-    to conduct a doubling experiment and \texttt{printBigOh()} can be
+    conduct a doubling experiment and \texttt{printBigOh()} can be
     called to show the result. Figure~\ref{fig:qsprogram} shows an
     complete Java class that conducts a doubling experiment on
     QuickSort; note the simplicity of the implementation when using

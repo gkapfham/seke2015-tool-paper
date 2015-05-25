@@ -32,18 +32,18 @@
 \begin{verbatim}
  Usage: <java SchemaExperiment> [options]
 Options:
- -schema, -s        Select which schema to use
- -criterion         Select which criterion to use
- -datagenerator     Select which data generator to use
- -doubler           Select which schemaDoubler to use
- -convergence       Experiment convergent if differance < tolerance
- -lookBack          Number of ratios to compare for convergence
- -tuningTries       Minimum number of times to doubles before O(1)
- -minDoubles        Minimum number of doubles to try
- -giveUp, -maxTime  Max time for a single trial in hours
- -help, -usage      Display command line options
- -o, -out, -csv     Name of the csv file to save data to
- -verbose, -debug   Display verbose output
+ --schema, -s         Select which schema to use
+ --criterion          Select which criterion to use
+ --datagenerator      Select which data generator to use
+ --doubler            Select which schemaDoubler to use
+ --convergence        Experiment convergent if differance < tolerance
+ --lookBack           Number of ratios to compare for convergence
+ --tuningTries        Minimum number of times to doubles before O(1)
+ --minDoubles         Minimum number of doubles to try
+ --giveUp, --maxTime  Max time for a single trial in hours
+ --help, --usage      Display command line options
+ -o, --out, --csv     Desired csv filename for saving data 
+ --verbose, --debug   Display verbose output
 \end{verbatim}
 }
 
@@ -53,8 +53,8 @@ Following the terminology from~\cite{kempka2015}, a doubling experiment
 to evaluate \textit{SchemaAnalyst} using the AICC criterion, a random
 data generator, the RiskIt database schema, and the number of
 \texttt{NOT NULL}s in the schema will run with this command:
-\texttt{java SchemaExperiment -criterion AICC -datagenerator random
--schema RiskIt -doubler DoubleNotNullsSemantic}.  Although less accurate
+\texttt{java SchemaExperiment --criterion AICC --datagenerator random
+--schema RiskIt --doubler DoubleNotNullsSemantic}.  Although less accurate
 than in the sorting case study, \toolname~still successfully revealed
 meaningful trends in \textit{SchemaAnalyst}'s
 performance~\cite{kinneer2015}.

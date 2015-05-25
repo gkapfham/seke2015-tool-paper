@@ -2,7 +2,7 @@
 
 {\bf Deploying on an HPC cluster}.
 Since the performance of \textit{SchemaAnalyst} may depend on a number
-of factors (i.e., criterion, data generator, schema, doubling strategy) a
+of factors (i.e., criterion, data generator, schema, and doubling strategy) a
 comprehensive survey of the parameter space may be conducted by
 performing a doubling experiment for each configuration. While
 computationally expensive, an experiment of this scale is possible by
@@ -24,7 +24,7 @@ an algorithm's performance trade-offs.
   The reliability of the tool and repeatability of its results would be further
   improved if \toolname could select good settings for these parameters
   automatically. A reasonable parameter tuning strategy could be to run
-  \toolname on various algorithms of known worst-case time complexities (such
-  as the sorting algorithms) and lower the \textit{tolerance} threshold until
+  \toolname on various algorithms of known worst-case time complexities, such
+  as the sorting algorithms, and lower the \textit{tolerance} threshold until
   \toolname reliably infers the big-Oh time complexities.
 
