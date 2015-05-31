@@ -12,18 +12,16 @@ conduct a doubling experiment with increasingly bigger input sizes. By measuring
 on inputs of size $n$ and $2n$, the algorithm's order of growth can be determined~\cite{mcgeoch2012}.
 
 The goal of a doubling experiment is to draw a conclusion regarding the efficiency of the algorithm from the ratio
-$f(2n)/f(n)$ that represents the factor of change in runtime from inputs
-of size $n$ and $2n$. For instance, a ratio of $2$
-would indicate that doubling the input size resulted in the runtime's doubling, leading to the conclusion that the
-algorithm under study is $O(n)$ or $O(n\log n)$.
-Table~\ref{table:ratios} shows some common time complexities and
+$f(2n)/f(n)$ that represents the factor of change in runtime from inputs of size $n$ and $2n$. For instance, a ratio of
+$2$ would indicate that doubling the input size resulted in the runtime's doubling, leading to the conclusion that the
+algorithm under study is $O(n)$ or $O(n\log n)$.  Table~\ref{table:ratios} shows some common time complexities and
 corresponding ratios.
 
 \begin{table}[h!]
   \vspace*{-.05in}
   \begin{center}
     \begin{tabular}{c|l}
-      Ratio $f(2n)/f(n)$ & Worst-Case Conclusion              \\ \hline
+      Ratio $f(2n)/f(n)$ & Worst-Case Conclusion              \\ \toprule
       1                  & constant or logarithmic \\
       2                  & linear or linearithmic  \\
       4                  & quadratic               \\
