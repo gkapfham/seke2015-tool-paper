@@ -12,19 +12,18 @@
     for each of the five provided sorting algorithms, \toolname~achieves
     an accuracy of $98.84\%$.
 
-    {\bf Case study: \textit{SchemaAnalyst}}. In other
-    work~\cite{kinneer2015}, we used \toolname~to perform a
-    comprehensive analysis of the search-based test data generation
-    tool, \textit{SchemaAnalyst}, that generates test suites for
-    relational database schemas~\cite{kapfhammer2013}. Since it is much
-    more complicated than a sorting algorithm, performing doubling
-    experiments on \textit{SchemaAnalyst} requires more parameters than
-    needed to study sorting.  To conduct these experiments, we developed
-    a class called \texttt{SchemaExperiment} that extends
-    \texttt{DoublingExperiment}.  We developed \texttt{SchemaExperiment}
-    to allow for conducting doubling experiments using a variety of
-    \textit{SchemaAnalyst} configurations, as well as accessing
-    \toolname's parameters.
+    {\bf Case study: \textit{SchemaAnalyst}}. In other work~\cite{kinneer2015},
+    we used \toolname~to perform a comprehensive analysis of the search-based
+    test data generation tool, \textit{SchemaAnalyst}, that generates test
+    suites for relational database schemas~\cite{kapfhammer2013}. Since it is
+    much more complicated than a sorting algorithm, performing doubling
+    experiments on \textit{SchemaAnalyst} requires more parameters than needed
+    to study sorting~\cite{kempka2015}.  To conduct these experiments, we
+    developed a class called \texttt{SchemaExperiment} that extends
+    \texttt{DoublingExperiment}.  We developed \texttt{SchemaExperiment} to
+    allow for conducting doubling experiments using a variety of
+    \textit{SchemaAnalyst} configurations, as well as accessing \toolname's
+    parameters.
 
     \vspace*{-.075in}
 
@@ -49,7 +48,7 @@ Options:
 
 \vspace*{-.075in}
 
-Following the terminology from~\cite{kempka2015}, a doubling experiment
+Following the terminology from~\cite{kinneer2015}, a doubling experiment
 to evaluate \textit{SchemaAnalyst} using the AICC criterion, a random
 data generator, the RiskIt database schema, and the number of
 \texttt{NOT NULL}s in the schema will run with this command:
