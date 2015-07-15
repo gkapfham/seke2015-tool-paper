@@ -2,8 +2,8 @@
 
 This repository contains the LaTeX source code and additional resources for a tool paper that was accepted for
 publication at the 27th International Conference on Software Engineering and Knowledge Engineering (SEKE 2015). The
-source code of the paper uses the LaTeX style files provided by the organizers of the conference and a wide variety of
-other packages that are normally standard with a modern LaTeX distribution such a TeXLive 2015.
+source code of the tool paper uses the LaTeX style files provided by the organizers of the conference and a wide variety
+of other packages that are normally standard with a modern LaTeX distribution such a TeXLive 2015.
 
 You are invited to use this repository as a means for learning more about preparing papers in the field of software
 engineering and as a way to investigate the results and writing in our paper. If you find this example useful, could I
