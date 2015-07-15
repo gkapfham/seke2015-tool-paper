@@ -1,4 +1,4 @@
-# seke2015-paper
+# seke2015-tool-paper
 
 This repository contains the LaTeX source code and additional resources for a tool paper that was accepted for
 publication at the 27th International Conference on Software Engineering and Knowledge Engineering (SEKE 2015). The
